@@ -28,12 +28,12 @@ void SMC::SMC_Tick(float angle_now,float angle_vel) //anlge为当前位置(°),ang_ve
 	// //快速终端滑模
 	s = (ang_vel - dref) + C * e_qp;
 	ds = -epsilon * Sat(s) - K * s;
-	u = -J * (ddref + ds - C * qp * (ang_vel - dref) * e_qp / abs(error));
+	u = J * (ddref + ds - C * qp * (ang_vel - dref) * e_qp / abs(error));
 
 	if (abs(error) < 1)
 	{
 		s = C * error + (ang_vel - dref);//smc surface
-		u = -J * (ddref - C * (ang_vel - dref) - epsilon * Sat(s) - K * s);
+		u = J * (ddref - C * (ang_vel - dref) - epsilon * Sat(s) - K * s);
 	}
 
 	//控制量限幅
